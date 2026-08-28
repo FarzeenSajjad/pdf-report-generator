@@ -91,7 +91,7 @@ Force a new one:
 Only one PDF landed in `reports/` from the first two calls, `force: true` is what
 made a second one.
 
-## Stage 4 note — why background job, and what it costs
+## Stage 4 note: why background job, and what it costs
 
 I moved generation out of the request from the start instead of doing it inline first.
 `POST /reports` inserts a `pending` row and hands the actual query + render + save
@@ -102,7 +102,7 @@ the POST response anymore, it has to poll `GET /reports/{id}` until `status` fli
 (Redis + a worker, or Inngest) instead of an in-process background task, since
 `BackgroundTasks` still dies if the server restarts mid-job.
 
-## Stage 5 note — what the once-a-day check protects against
+## Stage 5 note: what the once-a-day check protects against
 
 It stops a double-click, or a retried request after a flaky connection, from spinning
 up the same report twice. A real-world version of the same bug: a billing job that
