@@ -24,3 +24,24 @@ def init_orders_table():
     )
     conn.commit()
     conn.close()
+
+
+def init_reports_table():
+    conn = get_connection()
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS reports (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            path TEXT,
+            status TEXT NOT NULL DEFAULT 'pending',
+            created_at TEXT NOT NULL
+        )
+        """
+    )
+    conn.commit()
+    conn.close()
+
+
+def init_db():
+    init_orders_table()
+    init_reports_table()
